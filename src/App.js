@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useState } from "react";
+import TaskTracker from "./TaskTracker";
 function App() {
+  const [tasks, setTasks] = useState([
+    { id: 1, text: "SLEEP", Remainder: false, desc: "I wanna sleep at 12pm" },
+    { id: 2, text: "EAT", Remainder: false, desc: "I wanna eat meal at 08pm" },
+    { id: 3, text: "CODE", Remainder: false, desc: "I wanna code at 09pm" },
+  ]);
+  function onDelete(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+  function addTask(newTask) {
+    setTasks([...tasks, newTask]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TaskTracker tasks={tasks} onDelte={onDelete} addTask={addTask} />
     </div>
   );
 }
